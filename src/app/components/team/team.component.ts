@@ -9,7 +9,7 @@ export class TeamComponent implements OnInit {
 
   @Input() allTeams: string[][] = [] ;
 
-
+  currentDate = new Date();
 
   constructor() { }
 
