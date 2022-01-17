@@ -1,0 +1,6 @@
+<div *ngFor="let team of allTeams; let i = index" class="team-container">
+  <h3>Team {{ i + 1}}</h3>
+  <ul>
+    <li *ngFor="let member of team"> {{ member }} </li>
+  </ul>
+</div>

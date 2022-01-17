@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { TeamComponent } from './components/team/team.component';
 
 @Component({
   selector: 'app-root',
@@ -16,14 +16,10 @@ export class AppComponent {
 
   onInput(member: string){
     this.newMemberName = member;
-    console.log(this.newMemberName);
-
   }
 
   onNumberOfTeamsInput(value: string){
     this.numberOfTeams = Number(value);
-    console.log(this.numberOfTeams);
-
   }
 
   addMember(){
@@ -34,7 +30,6 @@ export class AppComponent {
 
 
     this.members.push(this.newMemberName)
-    console.log(this.members);
     this.newMemberName = '';
     this.errorMessage = '';
   }
@@ -42,10 +37,18 @@ export class AppComponent {
 
   generateTeams(){
     if (!this.numberOfTeams || this.numberOfTeams <= 0 || !this.members) {
-      return
+      this.errorMessage = "invalid Number of teams";
+      return;
+    }
+
+    if (this.members.length < this.numberOfTeams)
+    {
+      this.errorMessage = "Not enough members to create a team";
+      return;
     }
 
     const allMembers = [...this.members]; //destructure array, ... means rest of the operator
+    this.errorMessage = '';
 
     while (allMembers.length)
     {
@@ -70,6 +73,13 @@ export class AppComponent {
       }
     }
 
+    console.log(this.teams);
+
+    this.cleanUp();
+
+  }
+
+  cleanUp(){
     this.members  = [];
     this.numberOfTeams = '';
   }
