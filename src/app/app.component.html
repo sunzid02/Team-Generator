@@ -3,7 +3,9 @@
     <h1>Team Generator</h1>
 
     <ul class="list">
-
+      <li *ngFor="let member of members">
+        {{ member }}
+      </li>
     </ul>
 
     <div class="add-members-container">
@@ -12,6 +14,8 @@
        type="text"
        placeholder="Name"
        (input)="onInput(addMemberInput.value)"
+       [value]="newMemberName"
+
       >
       <button (click)="addMember()">
         Add
@@ -19,9 +23,18 @@
     </div>
 
     <div class="input-container">
-      <input type="number" name="teams" id="" placeholder="# of teams">
-      <button># of teams</button>
+      <input
+        #numberOfTeamsInput
+        type="number"
+        placeholder="# of teams"
+
+        (input)="onNumberOfTeamsInput(numberOfTeamsInput.value)"
+        [value]="numberOfTeams"
+      >
+      <button (click)="generateTeams()">Generate</button>
     </div>
+
+    <p *ngIf="errorMessage" class="error-msg" > {{ errorMessage }}</p>
   </div>
 
 </div>
